@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const authRoute = require('./routes/auth');
-
+const miniblogRoute = require('./routes/miniblog');
 
 dotenv.config();
 
@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(cors(corsConfig));
 
 app.use('/api/user', authRoute);
+app.use('/api/blog', miniblogRoute);
 
 //Connect to DB
 mongoose.connect(process.env.DBUrl,
