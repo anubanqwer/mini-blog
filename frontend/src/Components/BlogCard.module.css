@@ -1,0 +1,10 @@
+.cardBox {
+    width: 300px;
+    height: 300px;
+    border: grey solid 2px;
+}
+
+.statusCircle {
+    position: relative;
+    left: 20px;
+}

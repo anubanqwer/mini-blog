@@ -1,0 +1,8 @@
+.cardArea {
+    margin: 30px 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+    /* border: 1px solid red; */
+}
