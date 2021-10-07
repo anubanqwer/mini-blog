@@ -6,3 +6,7 @@
     grid-row-gap: 30px;
     /* border: 1px solid red; */
 }
+
+.logoutButton {
+    margin-bottom: 20px;
+}

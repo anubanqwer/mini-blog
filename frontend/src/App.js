@@ -10,8 +10,8 @@ function App() {
   return (
     <>
       {Object.keys(userData).length === 0 && <Authentication userData={userData} setUserData={setUserData}/>}
-      {/* {Object.keys(userData).length > 0 && <MiniBlog userData={userData} setUserData={setUserData}/>} */}
-      <MiniBlog userData={userData} setUserData={setUserData}/>
+      {Object.keys(userData).length > 0 && <MiniBlog userData={userData} setUserData={setUserData}/>}
+      {/* <MiniBlog userData={userData} setUserData={setUserData}/> */}
     </>
   );
 }
