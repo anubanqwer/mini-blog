@@ -43,7 +43,20 @@ export default function MiniBlog({userData, setUserData}) {
     }
 
     const editBlogAPI = (blogData) => {
+        console.log(blogData)
         axios.patch('http://localhost:3030/api/blog', blogData)
+        .then(res =>{
+            console.log(res.data);
+            updateData();
+        })
+        .catch(err =>{
+            console.log(err);
+        });
+    }
+
+    const deleteBlogAPI = (blogData) => {
+        console.log('Delete a blog!', blogData)
+        axios.delete('http://localhost:3030/api/blog', {data: blogData})
         .then(res =>{
             console.log(res.data);
             updateData();
@@ -59,10 +72,11 @@ export default function MiniBlog({userData, setUserData}) {
             <br />
             <button className={Styles.logoutButton} onClick={(e) => logout()}>Logout</button>
             <br />
-            <BasicModal type='add' addNewBlogAPI={addNewBlogAPI} userData={userData } />
+            <BasicModal type='add' addNewBlogAPI={addNewBlogAPI} userData={userData} />
             <div className={Styles.cardArea}>
                 {data.map((o, i) => {
-                    return (<BlogCard key={i} jsonObject={o}/>);
+                    return (<BlogCard key={i} jsonObject={o} type='edit' editBlogAPI={editBlogAPI} deleteBlogAPI={deleteBlogAPI}
+                             userData={userData}/>);
                 })}
             </div>
         </div>

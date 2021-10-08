@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({type, addNewBlogAPI, userData}) {
+export default function BasicModal({type, addNewBlogAPI, editBlogAPI, userData, jsonObject}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -34,6 +34,10 @@ export default function BasicModal({type, addNewBlogAPI, userData}) {
   const [content, setContent] = useState('')
 
   const addNewBlog = () => {
+    if(name==='' || status==='' || category==='' || content===''){
+      alert('please fill all fields')
+      return
+    }
     addNewBlogAPI({
       name: name,
       status: status,
@@ -45,13 +49,32 @@ export default function BasicModal({type, addNewBlogAPI, userData}) {
     handleClose()
   }
 
-  const editBlog = () => {
-    
+  const editBlog = async () => {
+    if(name==='' && status==='' && category==='' && content===''){
+      handleClose()
+      return
+    }
+    var obj = {}
+    if(name !== ''){
+      Object.assign(obj, {name: name})
+    }
+    if(status !== ''){
+      Object.assign(obj, {status: status})
+    }
+    if(category !== ''){
+      Object.assign(obj, {category: category})
+    }
+    if(content !== ''){
+      Object.assign(obj, {name: content})
+    }
+    Object.assign(obj, {_id: jsonObject._id})
+    editBlogAPI(obj)
+    handleClose()
   }
 
   return (
     <div>
-      <Button onClick={handleOpen}>{type === 'add' ? 'add new blog' : 'Open modal'}</Button>
+      <Button onClick={handleOpen}>{type === 'add' ? 'add new blog' : 'Edit'}</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -71,7 +94,7 @@ export default function BasicModal({type, addNewBlogAPI, userData}) {
           <label htmlFor="content">Content:</label>
           <input type="text" id="content" value={content} onChange={(e) => setContent(e.target.value)} />
           <br />
-          <button onClick={type === 'add' ? addNewBlog: editBlog}>Add</button>
+          <button onClick={type === 'add' ? addNewBlog: editBlog}>{type==='add' ? 'Add': 'Edit'}</button>
           <button onClick={handleClose}>Cancel</button>       
         </Box>
       </Modal>
