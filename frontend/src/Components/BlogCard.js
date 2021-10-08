@@ -17,15 +17,26 @@ export default function BlogCard({jsonObject, type, editBlogAPI, deleteBlogAPI, 
 
     return (
         <div className={Styles.cardBox}>
-            <div>
-                {jsonObject.name}
-                {isOwnerCard() && <BasicModal type='edit' editBlogAPI={editBlogAPI} userData={userData} jsonObject={jsonObject} />}
-                {isOwnerCard() && <button onClick={deleteBlog}>delete</button>}
-                <BsCircle color={jsonObject.status} className={Styles.statusCircle}/>
+                        
+            <div className={Styles.editButtonInCard}>
+                {isOwnerCard() && <BasicModal type='edit' editBlogAPI={editBlogAPI} userData={userData} jsonObject={jsonObject} 
+                className={Styles.editButtonInCard} />}
             </div>
-            <p>{jsonObject.category}</p>
-            <p>{jsonObject.content}</p>
-            <p>{jsonObject.author}</p>
+
+            {isOwnerCard() && <button onClick={deleteBlog} className={Styles.deleteButtonInCard}>delete</button>}
+
+            <div className={Styles.statusCircle}>
+                <BsCircle color={jsonObject.status} />
+            </div>
+            
+            <div style={{
+                lineHeight: '30px',
+            }}>
+                <b>{jsonObject.name}</b>
+                <p>{jsonObject.category}</p>
+                <p>{jsonObject.content}</p>
+                <p>{jsonObject.author}</p>
+            </div>
         </div>
     )
 }

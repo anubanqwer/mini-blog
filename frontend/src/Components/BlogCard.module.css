@@ -2,9 +2,29 @@
     width: 300px;
     height: 300px;
     border: grey solid 2px;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
 }
 
 .statusCircle {
-    position: relative;
-    left: 20px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+.editButtonInCard {
+    position: absolute;
+    right: 40px;
+    top: 10px;
+}
+
+.deleteButtonInCard {
+    position: absolute;
+    right: 85px;
+    top: 10px;
+    /* background: red;
+    border-radius: 15px;
+    color: white;
+    padding: 5px; */
 }
