@@ -10,8 +10,12 @@ export default function MiniBlog({userData, setUserData}) {
     const [data, setData] = useState([]);
     const [toggleForUpdate, setToggleForUpdate] = useState(false);
 
+    const config = {
+        headers: { 'auth-token': userData.token }
+    };
+
     useEffect(() => {
-        axios.get('http://localhost:3030/api/blog')
+        axios.get('http://localhost:3030/api/blog', config)
         .then(res =>{
             console.log(res.data);
             setData(res.data);
@@ -32,7 +36,7 @@ export default function MiniBlog({userData, setUserData}) {
 
     const addNewBlogAPI = (blogData) => {
         console.log(blogData)
-        axios.post('http://localhost:3030/api/blog', blogData)
+        axios.post('http://localhost:3030/api/blog', blogData, config)
         .then(res =>{
             console.log(res.data);
             updateData();
@@ -44,7 +48,7 @@ export default function MiniBlog({userData, setUserData}) {
 
     const editBlogAPI = (blogData) => {
         console.log(blogData)
-        axios.patch('http://localhost:3030/api/blog', blogData)
+        axios.patch('http://localhost:3030/api/blog', blogData, config)
         .then(res =>{
             console.log(res.data);
             updateData();
@@ -56,7 +60,10 @@ export default function MiniBlog({userData, setUserData}) {
 
     const deleteBlogAPI = (blogData) => {
         console.log('Delete a blog!', blogData)
-        axios.delete('http://localhost:3030/api/blog', {data: blogData})
+        axios.delete('http://localhost:3030/api/blog', {
+            data: blogData, 
+            headers: { 'auth-token': userData.token }
+        })
         .then(res =>{
             console.log(res.data);
             updateData();

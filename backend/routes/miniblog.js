@@ -1,8 +1,9 @@
 const Card = require('../models/Card');
+const verify = require('../middlewares/VerifyToken');
 
 const router = require('express').Router();
 
-router.get('/', async (req, res) =>{
+router.get('/', verify, async (req, res) =>{
     console.log('get all blogs')
 
     try{
@@ -13,7 +14,7 @@ router.get('/', async (req, res) =>{
     }
 });
 
-router.post('/', async (req, res) =>{
+router.post('/', verify, async (req, res) =>{
     console.log('new blog', req.body)
 
     const card = new Card({
@@ -33,7 +34,7 @@ router.post('/', async (req, res) =>{
     }
 });
 
-router.patch('/', async (req, res) =>{
+router.patch('/', verify, async (req, res) =>{
     console.log('edit blog', req.body._id)
     try{
         const card = await Card.findById(req.body._id);
@@ -45,7 +46,7 @@ router.patch('/', async (req, res) =>{
     }
 });
 
-router.delete('/', async (req, res) =>{
+router.delete('/', verify, async (req, res) =>{
     console.log('delete blog', req.body._id)
     try{
         const card = await Card.findById(req.body._id);
