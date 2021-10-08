@@ -15,6 +15,7 @@ export default function MiniBlog({userData, setUserData}) {
     };
 
     useEffect(() => {
+        console.log(userData)
         axios.get('http://localhost:3030/api/blog', config)
         .then(res =>{
             console.log(res.data);

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
@@ -74,12 +73,12 @@ export default function BasicModal({type, addNewBlogAPI, editBlogAPI, userData, 
 
   return (
     <div>
-      <Button onClick={handleOpen}>{type === 'add' ? 'add new blog' : 'Edit'}</Button>
+      <button onClick={handleOpen}>{type === 'add' ? 'add new blog' : 'Edit'}</button >
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-describedby="modal-modal-description"  
       >
         <Box sx={style}>
           <label htmlFor="name">Name:</label>
