@@ -11,12 +11,16 @@ export default function BlogCard({jsonObject, type, editBlogAPI, deleteBlogAPI, 
         })
     }
 
+    const isOwnerCard = () => {
+        return userData._id === jsonObject.userId ? true : false;
+    }
+
     return (
         <div className={Styles.cardBox}>
             <div>
                 {jsonObject.name}
-                <BasicModal type='edit' editBlogAPI={editBlogAPI} userData={userData} jsonObject={jsonObject} />
-                <button onClick={deleteBlog}>delete</button>
+                {isOwnerCard() && <BasicModal type='edit' editBlogAPI={editBlogAPI} userData={userData} jsonObject={jsonObject} />}
+                {isOwnerCard() && <button onClick={deleteBlog}>delete</button>}
                 <BsCircle color={jsonObject.status} className={Styles.statusCircle}/>
             </div>
             <p>{jsonObject.category}</p>
